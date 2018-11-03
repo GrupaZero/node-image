@@ -2,8 +2,8 @@ FROM node:10-alpine
 
 RUN apk add --update --no-cache ansible bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
 
-RUN npm install -g yarn@1.10.1 && \
-  yarn global add @vue/cli@3.0.5
+RUN npm install -g yarn@1.12.1 && \
+  yarn global add @vue/cli@3.1.1
 
 RUN mkdir /.yarn-cache && \
   chown node:node /.yarn-cache && \
