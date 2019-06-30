@@ -19,7 +19,7 @@ RUN mkdir /.yarn-cache && \
   tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   mv linux-amd64/helm /usr/local/bin/helm && \
   mv linux-amd64/tiller /usr/local/bin/tiller && \
-  rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64 & \
+  rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64 && \
   curl -sSL -o /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl" && \
   chmod +x /usr/bin/kubectl
 
