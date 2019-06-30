@@ -1,6 +1,7 @@
 FROM node:12-alpine
 
 ENV HELM_VERSION v2.14.1
+ENV KUBERNETES_VERSION v1.14.0
 
 RUN apk add --update --no-cache ansible bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
 
@@ -18,7 +19,9 @@ RUN mkdir /.yarn-cache && \
   tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   mv linux-amd64/helm /usr/local/bin/helm && \
   mv linux-amd64/tiller /usr/local/bin/tiller && \
-  rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64
+  rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64 & \
+  curl -sSL -o /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl" && \
+  chmod +x /usr/bin/kubectl
 
 USER node
 
