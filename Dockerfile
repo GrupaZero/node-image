@@ -5,8 +5,8 @@ ENV KUBERNETES_VERSION v1.14.0
 
 RUN apk add --update --no-cache ansible bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
 
-RUN npm install -g yarn@1.16.0 && \
-  yarn global add @vue/cli@3.8.4
+RUN npm install -g yarn@1.17.3 && \
+  yarn global add @vue/cli@3.10.0
 
 RUN usermod -aG wheel node && \
   sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
