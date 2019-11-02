@@ -1,11 +1,11 @@
 FROM node:12-alpine
 
-ENV HELM_VERSION v2.14.1
-ENV KUBERNETES_VERSION v1.14.0
+ENV HELM_VERSION v3.0.0-rc.2
+ENV KUBERNETES_VERSION v1.15.0
 
-RUN apk add --update --no-cache ansible bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
+RUN apk add --update --no-cache bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
 
-RUN npm install -g yarn@1.17.3 && \
+RUN npm install -g yarn@1.19.1 && \
   yarn global add @vue/cli@3.10.0
 
 RUN usermod -aG wheel node && \
@@ -18,7 +18,6 @@ RUN mkdir /.yarn-cache && \
   wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   mv linux-amd64/helm /usr/local/bin/helm && \
-  mv linux-amd64/tiller /usr/local/bin/tiller && \
   rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64 && \
   curl -sSL -o /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl" && \
   chmod +x /usr/bin/kubectl
