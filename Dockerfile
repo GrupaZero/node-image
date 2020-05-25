@@ -1,12 +1,12 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
-ENV HELM_VERSION v3.0.0-rc.2
-ENV KUBERNETES_VERSION v1.15.0
+ENV HELM_VERSION v3.2.1
+ENV KUBERNETES_VERSION v1.17.0
 
 RUN apk add --update --no-cache bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo
 
-RUN npm install -g yarn@1.19.1 && \
-  yarn global add @vue/cli@3.10.0
+RUN npm install -g --force yarn@1.22.4 && \
+  yarn global add @vue/cli@3.12.0
 
 RUN usermod -aG wheel node && \
   sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
