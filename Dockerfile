@@ -3,7 +3,7 @@ FROM node:14-alpine
 ENV HELM_VERSION v3.2.1
 ENV KUBERNETES_VERSION v1.17.0
 
-RUN apk add --update --no-cache bash docker git vim curl gnupg make g++ wget htop openssh python2 shadow sudo postgresql-client
+RUN apk add --update --no-cache bash docker git tar vim curl gnupg make g++ wget htop openssh python2 shadow sudo postgresql-client
 
 RUN npm install -g --force yarn@1.22.4 && \
   yarn global add @vue/cli@3.12.0
