@@ -1,21 +1,16 @@
-FROM node:14-alpine
+FROM node:15-alpine
 
-ENV HELM_VERSION v3.2.1
-ENV KUBERNETES_VERSION v1.17.0
+ENV HELM_VERSION v3.5.3
+ENV KUBERNETES_VERSION v1.20.0
 
 RUN apk add --update --no-cache bash docker git tar zstd vim curl gnupg make g++ wget htop openssh python2 shadow sudo postgresql-client
 
-RUN npm install -g --force yarn@1.22.4 && \
-  yarn global add @vue/cli@3.12.0
+RUN npm install -g --force yarn@1.22.10 npm@7.9.0
 
 RUN usermod -aG wheel node && \
   sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
 
-RUN mkdir /.yarn-cache && \
-  chown node:node /.yarn-cache && \
-  printf "{\n\"useTaobaoRegistry\": false,\n\"packageManager\": \"yarn\"\n}" > /home/node/.vuerc  && \
-  chown node:node /home/node/.vuerc && \
-  wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
+RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   mv linux-amd64/helm /usr/local/bin/helm && \
   rm -rf helm-${HELM_VERSION}-linux-amd64.tar.gz linux-amd64 && \
@@ -23,8 +18,6 @@ RUN mkdir /.yarn-cache && \
   chmod +x /usr/bin/kubectl
 
 USER node
-
-RUN yarn config set cache-folder /.yarn-cache
 
 WORKDIR /app
 
