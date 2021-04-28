@@ -1,11 +1,11 @@
-FROM node:15-alpine
+FROM node:14-alpine
 
 ENV HELM_VERSION v3.5.3
 ENV KUBERNETES_VERSION v1.20.0
 
 RUN apk add --update --no-cache bash docker git tar zstd vim curl gnupg make g++ wget htop openssh python2 python3 jq shadow sudo postgresql-client
 
-RUN npm install -g --force yarn@1.22.10 npm@7.9.0
+RUN npm install -g --force yarn@1.22.10
 
 RUN usermod -aG wheel node && \
   sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
