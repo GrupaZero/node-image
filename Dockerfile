@@ -1,7 +1,7 @@
-FROM node:14-buster-slim
+FROM node:16-buster-slim
 
-ENV HELM_VERSION v3.5.3
-ENV KUBERNETES_VERSION v1.20.0
+ENV HELM_VERSION v3.9.2
+ENV KUBERNETES_VERSION v1.22.6
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \  
