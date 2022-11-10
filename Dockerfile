@@ -1,7 +1,7 @@
-FROM node:16-buster-slim
+FROM node:18-buster-slim
 
-ENV HELM_VERSION v3.9.2
-ENV KUBERNETES_VERSION v1.22.6
+ENV HELM_VERSION v3.10.0
+ENV KUBERNETES_VERSION v1.25.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \  
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g --force yarn@1.22.10
+RUN npm install -g pnpm
 
 RUN usermod -aG docker node
 
@@ -37,8 +37,10 @@ RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
   curl -sSL -o /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl" && \
   chmod +x /usr/bin/kubectl
 
-USER node
+RUN mkdir /app && chown node:node /app
 
 WORKDIR /app
 
-CMD ["yarn", "start"]
+USER node
+
+CMD ["pnpm", "start"]
